@@ -10,18 +10,28 @@ const Navbar = () => {
   const displaySubmenu = (e) => {
     const page = e.target.textContent
     const tempBtn = e.target.getBoundingClientRect()
-    console.log(tempBtn );
-    const center = (tempBtn.right + tempBtn.left) /2 
+
+    const center = (tempBtn.right + tempBtn.left) / 2
     const bottom = tempBtn.bottom - 3
 
-   
-    
-    
     openSubmenu(page, { center, bottom })
   }
 
+  const handleSubmenu = (e) => {
+    const classes = e.target.classList
+
+    if (!classes.contains('link-btn')) {
+      closeSubmenu()
+    }
+
+    // if(classes.value !== 'link-btn'){
+
+    //   closeSubmenu()
+    // }
+  }
+
   return (
-    <nav className="nav">
+    <nav className="nav" onMouseOver={handleSubmenu}>
       <div className="nav-center">
         <div className="nav-header">
           <img src={logo} alt="strip" className="nav-logo" />
@@ -34,37 +44,23 @@ const Navbar = () => {
             <button
               className="link-btn"
               onMouseOver={displaySubmenu}
-              onMouseLeave={closeSubmenu}
+              //
             >
-              Products
+              products
             </button>
           </li>
           <li>
-            <button
-              className="link-btn"
-              onMouseOver={displaySubmenu}
-              onMouseLeave={closeSubmenu}
-            >
-              Developers
+            <button className="link-btn" onMouseOver={displaySubmenu}>
+              developers
             </button>
           </li>
           <li>
-            <button
-              className="link-btn"
-              onMouseOver={displaySubmenu}
-              onMouseLeave={closeSubmenu}
-            >
-              Company
+            <button className="link-btn" onMouseOver={displaySubmenu}>
+              company
             </button>
           </li>
         </ul>
-        <button
-          className="btn signin-btn"
-          onMouseOver={displaySubmenu}
-          onMouseLeave={closeSubmenu}
-        >
-          Sign in
-        </button>
+        <button className="btn signin-btn">Sign in</button>
       </div>
     </nav>
   )
